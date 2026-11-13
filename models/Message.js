@@ -7,17 +7,20 @@ const messageSchema = new mongoose.Schema(
       type: String,
       required: true, // اسم فرستنده - اجباریه
       trim: true, // فاصله‌های اضافه‌ی اول و آخر رو خودش حذف می‌کنه
+      maxlength: 80,
     },
     email: {
       type: String,
       required: true,
       trim: true,
       lowercase: true, // همه ایمیل‌ها رو حروف کوچیک ذخیره می‌کنه که یکدست باشه
+      maxlength: 120,
     },
     message: {
       type: String,
       required: true,
       trim: true,
+      maxlength: 3000,
     },
     status: {
       type: String,

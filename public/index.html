@@ -4,6 +4,14 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Amir Einy | برنامه‌نویس بک‌اند</title>
+<meta name="description" content="امیر عینی، توسعه‌دهنده‌ی بک‌اند با Node.js، Express.js و MongoDB. نمونه‌کارها، مهارت‌ها و راه‌های ارتباط.">
+<meta name="author" content="Amir Einy">
+<meta name="theme-color" content="#121023">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="fa_IR">
+<meta property="og:title" content="Amir Einy | برنامه‌نویس بک‌اند">
+<meta property="og:description" content="توسعه‌دهنده‌ی بک‌اند با Node.js، Express.js و MongoDB. نمونه‌کارها و راه‌های ارتباط.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Estedad:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -479,7 +487,7 @@
           <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l3 5-2 2c1 2.5 3.5 5 6 6l2-2 5 3v3c0 1-1 2-2 2C10 22 2 14 2 6c0-1 1-2 2-2h2z"/></svg></span>
           <span dir="ltr" style="unicode-bidi:isolate">0939 137 5914</span>
         </a>
-        <a href="#">
+        <a href="https://t.me/e_amir_y" target="_blank" rel="noopener noreferrer">
           <span class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4L3 11l6 2m12-9l-4 17-8-6m12-11L9 13"/></svg></span>
           تلگرام
         </a>
@@ -489,16 +497,16 @@
       <div class="field-row">
         <div>
           <label>اسم</label>
-          <input type="text" name="name" placeholder="نام شما" required>
+          <input type="text" name="name" placeholder="نام شما" maxlength="80" autocomplete="name" required>
         </div>
         <div>
           <label>ایمیل</label>
-          <input type="email" name="email" placeholder="you@example.com" required>
+          <input type="email" name="email" placeholder="you@example.com" maxlength="120" autocomplete="email" required>
         </div>
       </div>
       <div>
         <label>پیام</label>
-        <textarea name="message" placeholder="پیامت را بنویس..." required></textarea>
+        <textarea name="message" placeholder="پیامت را بنویس..." maxlength="3000" required></textarea>
       </div>
       <button type="submit" class="btn btn-primary" id="contact-submit">ارسال پیام</button>
       <span class="form-note mono" id="form-status">// بعد از ارسال، پیام مستقیم به ایمیل و تلگرام من می‌رسه</span>
@@ -610,8 +618,9 @@
 
   // ----- فرم تماس: ارسال به بک‌اند -----
   (function(){
-    // وقتی بک‌اند رو روی سرور واقعی آپلود کردی، همین آدرس رو با آدرس سرورت عوض کن
-    var API_BASE_URL = 'http://localhost:5000';
+    // صفحه و API روی یک دامنه‌ان، پس آدرس خالی یعنی «همین سایت».
+    // فقط وقتی index.html رو مستقیم از روی فایل باز می‌کنی، به سرور لوکال وصل میشه.
+    var API_BASE_URL = location.protocol === 'file:' ? 'http://localhost:5000' : '';
 
     var form = document.getElementById('contact-form');
     var submitBtn = document.getElementById('contact-submit');

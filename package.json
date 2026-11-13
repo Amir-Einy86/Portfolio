@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "بک‌اند فرم تماس پورتفولیو - ذخیره در MongoDB + ارسال به Gmail و Telegram",
   "main": "server.js",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "dev": "nodemon server.js",
     "start": "node server.js"

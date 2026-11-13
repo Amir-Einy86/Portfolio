@@ -3,12 +3,29 @@ const Message = require('../models/Message');
 const { sendContactEmail } = require('../services/mailer');
 const { sendTelegramMessage } = require('../services/telegram');
 
-exports.createMessage = async (req, res) => {
-  const { name, email, message } = req.body;
+// حداکثر طول هر فیلد - که کسی نتونه متن‌های خیلی بزرگ بفرسته
+const LIMITS = { name: 80, email: 120, message: 3000 };
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  // اعتبارسنجی ساده - قبل از هر کاری چک می‌کنیم فیلدها خالی نباشن
+// فقط رشته قبول می‌کنیم (نه آبجکت یا آرایه) و فاصله‌های اول و آخر رو حذف می‌کنیم
+const clean = (value) => (typeof value === 'string' ? value.trim() : '');
+
+exports.createMessage = async (req, res) => {
+  const body = req.body || {};
+  // اسم توی عنوان ایمیل میره، پس خط جدید نباید داشته باشه
+  const name = clean(body.name).replace(/[\r\n]+/g, ' ');
+  const email = clean(body.email);
+  const message = clean(body.message);
+
+  // اعتبارسنجی - قبل از هر کاری چک می‌کنیم فیلدها درست باشن
   if (!name || !email || !message) {
     return res.status(400).json({ message: 'نام، ایمیل و متن پیام الزامیه' });
+  }
+  if (name.length > LIMITS.name || email.length > LIMITS.email || message.length > LIMITS.message) {
+    return res.status(400).json({ message: 'یکی از فیلدها خیلی طولانیه' });
+  }
+  if (!EMAIL_RE.test(email)) {
+    return res.status(400).json({ message: 'ایمیل واردشده معتبر نیست' });
   }
 
   try {
