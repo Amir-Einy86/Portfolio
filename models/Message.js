@@ -25,7 +25,7 @@ const messageSchema = new mongoose.Schema(
     status: {
       type: String,
       enum: ['pending', 'sent', 'failed'], // فقط همین سه تا مقدار مجازن
-      default: 'pending', // وقتی پیام تازه ذخیره میشه، هنوز به جیمیل/تلگرام نرفته
+      default: 'pending', // وقتی پیام تازه ذخیره میشه، هنوز به جیمیل نرفته
     },
   },
   {
